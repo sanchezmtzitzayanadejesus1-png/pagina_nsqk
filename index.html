@@ -102,12 +102,18 @@ opacity:calc(.45 + .55/(1 + var(--d)*var(--d)*99));transform:scale(calc(1 + .25/
 @media(max-width:760px){
 .bio{display:block;padding:14vh 6vw 12vh}.photo{inset:0 0 50% 0}.inner{padding:34vh 0 0}.hl{margin:24px 0 0}
 .inner .blk:nth-child(2){margin-left:0}
-.info{bottom:15vh}.cv{top:36%}.grid{grid-template-columns:repeat(2,1fr)}}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
-</style>
-</head>
-<body>
+.grid{grid-template-columns:repeat(2,1fr)}
 
+/* álbumes en celular: portada arriba, texto abajo */
+.albums{height:auto;min-height:100vh;padding-bottom:40px}
+.albums h2{top:70px}
+.row{--wm:min(54vw,36vh);position:relative;inset:auto;display:flex;flex-direction:column;padding-top:calc(130px + var(--wm) + 20px)}
+.bg{background:radial-gradient(circle at 50% calc(130px + var(--wm)/2),var(--c),rgba(0,0,0,.92) 62%,#000)}
+.cv{--w:var(--wm);top:calc(130px + var(--wm)/2)}
+.ghost{top:110px}
+.dots{order:-1;position:relative;bottom:auto;left:auto;transform:none;justify-content:center;margin:0 0 28px}
+.info{position:relative;left:auto;bottom:auto;max-width:none;margin:0 6vw}
+.info p{font-size:.9rem;line-height:1.5}}
 <!-- PORTADA -->
 <section class="hero">
   <nav class="menu"><a href="#bio">biografía</a><a href="#albums">álbumes</a><a href="#videos">visuales</a><a href="#spotify">spotify</a><a href="#merch">merch</a></nav>
