@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NSQK</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#ff1a1a}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:#000;color:#fff;font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+section{position:relative;min-height:100vh;overflow:hidden}
+.cross{position:absolute;color:var(--red);font-weight:800;font-size:28px;line-height:1}
+.btn{display:inline-block;align-self:flex-start;background:#000;color:#fff;text-decoration:none;font-weight:800;font-size:1.1rem;padding:18px 34px;transition:.3s}
+.btn:hover{background:#fff;color:var(--red)}
+
+/* PORTADA*/
+.hero{background:url(nsqk.jpg) center/cover no-repeat #fff;color:#000;display:flex;align-items:center;padding:6vw}
+.title{font-weight:900;font-size:clamp(5rem,26vw,22rem);letter-spacing:-.06em;line-height:.8;color:var(--red);display:flex}
+.title span{display:inline-block;opacity:0;filter:blur(18px);transform:translateY(40px) scale(1.15);
+animation:in 1.1s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.2s + var(--n)*.35s)}
+@keyframes in{to{opacity:1;filter:blur(0);transform:none}}
+.tag,.menu{position:absolute;opacity:0;animation:in 1s forwards}
+.tag{left:6vw;bottom:9vh;color:var(--red);font-weight:800;font-size:clamp(1.1rem,3vw,2rem);line-height:1.1;animation-delay:1.6s}
+.tag.r{left:auto;right:6vw;text-align:right;animation-delay:1.9s}
+.menu{top:24px;left:6vw;right:6vw;display:flex;gap:24px;font-weight:800;font-size:.95rem;animation-delay:2.2s;mix-blend-mode:difference}
+.menu a{color:#fff;text-decoration:none}.menu a:hover{text-decoration:underline}
+
+/* BIOGRAFÍA */
+.bio{display:grid;grid-template-columns:1.1fr 1fr;align-items:center}
+.photo{position:absolute;inset:0 45% 0 0;background:url(nsqk-bio.jpg) center/cover no-repeat #1b1b1b}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,#000)}
+.bio h2{position:absolute;top:12vh;left:6vw;z-index:2;font-size:clamp(2.4rem,7vw,5.5rem);font-weight:900;letter-spacing:-.01em}
+.inner{grid-column:2;display:flex;flex-direction:column;gap:48px;position:relative;z-index:2;padding:12vh 6vw 8vh 0}
+.blk{position:relative;z-index:2;max-width:420px}
+.blk b{display:block;font-size:1.6rem;font-weight:800;margin-bottom:12px}
+.blk p{font-size:1rem;line-height:1.65;font-weight:500}
+.inner .blk:nth-child(2){margin-left:-40px}
+.hl{background:rgba(255,26,26,.85);padding:16px 18px;grid-column:1;max-width:340px;align-self:end;margin:0 0 12vh 6vw}
+.foot{position:absolute;bottom:4vh;left:6vw;right:6vw;z-index:2;text-align:center;line-height:1.5;color:#ddd}
+
+/* ÁLBUMES (solo CSS) */
+@property --c{syntax:'<color>';inherits:true;initial-value:#ff1a1a}
+.albums{height:100vh;min-height:640px}
+.albums>input{position:absolute;opacity:0;pointer-events:none}
+.albums h2{position:absolute;z-index:40;top:8vh;left:6vw;font-size:clamp(1.6rem,4vw,3rem);font-weight:900;letter-spacing:-.04em}
+.row{position:absolute;inset:0;perspective:1200px;transition:--c .9s}
+.bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,var(--c),rgba(0,0,0,.92) 62%,#000)}
+.s{display:none}
+.ghost{position:absolute;left:0;right:0;top:20%;text-align:center;font-weight:900;font-size:clamp(5rem,22vw,20rem);letter-spacing:-.06em;line-height:.9;opacity:.09;white-space:nowrap;animation:gh .9s}
+@keyframes gh{from{opacity:0;transform:scale(1.1)}}
+.info{position:absolute;z-index:40;left:6vw;bottom:13vh;max-width:min(360px,70vw)}
+.info>*{animation:up .7s both}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.info small{display:block;font-weight:800;color:var(--red);margin-bottom:8px}
+.info h3{font-size:clamp(2rem,5vw,3.6rem);font-weight:900;letter-spacing:-.05em;line-height:.9;margin-bottom:10px}
+.info p{font-size:.85rem;line-height:1.4;font-weight:500}
+.info iframe{display:block;width:100%;height:80px;border:0;border-radius:12px;margin-top:16px}
+.cv,.dots label{--d:calc(var(--n) - var(--i));cursor:pointer;transition:.8s cubic-bezier(.2,.7,.2,1)}
+.cv{--w:min(34vh,58vw);position:absolute;left:50%;top:42%;width:var(--w);aspect-ratio:1;display:grid;place-items:center;
+font-size:calc(var(--w)*.42);font-weight:900;letter-spacing:-.06em;
+background:linear-gradient(150deg,var(--k),var(--e,#000) 160%);
+box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 calc(120px/(1 + var(--d)*var(--d)*99)) var(--k);
+transform:translate(-50%,-50%) translateX(calc(var(--d)*98%)) scale(calc(1/(1 + var(--d)*var(--d)*.4))) rotateY(calc(var(--d)*-14deg));
+opacity:calc(1/(1 + var(--d)*var(--d)*.8));z-index:calc(30 - var(--d)*var(--d));filter:brightness(calc(1/(1 + var(--d)*var(--d)*.6)))}
+.cv::before{content:"+";position:absolute;top:10px;left:14px;font-size:26px;color:var(--red);line-height:1}
+.cv::before{z-index:1}
+.cv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dots{position:absolute;z-index:40;bottom:5vh;left:50%;transform:translateX(-50%);display:flex;gap:10px}
+.dots label{width:22px;height:22px;border:2px solid #fff;background:var(--k);
+opacity:calc(.45 + .55/(1 + var(--d)*var(--d)*99));transform:scale(calc(1 + .25/(1 + var(--d)*var(--d)*99)))}
+
+/* un renglón por álbum: su posición, su color y su texto */
+#a1:checked~.row{--i:0;--c:#2b5cff}#a1:checked~.row .s1,
+#a2:checked~.row .s2,#a3:checked~.row .s3,#a4:checked~.row .s4,#a5:checked~.row .s5{display:block}
+#a2:checked~.row{--i:1;--c:#f0f0f0}
+#a3:checked~.row{--i:2;--c:#ff1a1a}
+#a4:checked~.row{--i:3;--c:#ff7a00}
+#a5:checked~.row{--i:4;--c:#08208f}
+
+/* VISUALES */
+.vid{background:#000;padding:14vh 6vw;min-height:auto}
+.vid h2{font-size:clamp(4rem,20vw,16rem);font-weight:900;letter-spacing:-.07em;line-height:.85;color:var(--red);margin-bottom:5vh}
+.vid iframe,.vid video{display:block;width:min(100%,var(--w,1000px));aspect-ratio:var(--r,16/9);border:0;background:#111}
+
+/* SPOTIFY (la imagen de fondo es spotify.jpg) */
+.spot{background:linear-gradient(rgba(255,26,26,.78),rgba(255,26,26,.78)),url(spotify.jpg) center/cover no-repeat #ff1a1a;color:#000;display:flex;flex-direction:column;justify-content:center;padding:8vw 6vw;min-height:80vh}
+.spot h2{font-size:clamp(3rem,13vw,11rem);font-weight:900;letter-spacing:-.07em;line-height:.85;margin-bottom:5vh}
+
+/* MERCH */
+.merch{background:#fff;color:#000;padding:14vh 6vw;min-height:70vh;display:flex;flex-direction:column;justify-content:center}
+.merch h2{font-size:clamp(4rem,20vw,16rem);font-weight:900;letter-spacing:-.07em;line-height:.85;color:var(--red);margin-bottom:5vh}
+.merch .btn{background:var(--red)}.merch .btn:hover{background:#000;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:6vh}
+.item{color:#000;text-decoration:none;font-weight:800}
+.pic{aspect-ratio:1;background:#ececec;overflow:hidden;margin-bottom:10px}
+.pic img{width:100%;height:100%;object-fit:cover;display:block;transition:.5s}
+.item:hover img{transform:scale(1.06)}
+.item span{display:block;color:var(--red)}
+
+@media(max-width:760px){
+.bio{display:block;padding:14vh 6vw 12vh}.photo{inset:0 0 50% 0}.inner{padding:34vh 0 0}.hl{margin:24px 0 0}
+.inner .blk:nth-child(2){margin-left:0}
+.info{bottom:15vh}.cv{top:36%}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<section class="hero">
+  <nav class="menu"><a href="#bio">biografía</a><a href="#albums">álbumes</a><a href="#videos">visuales</a><a href="#spotify">spotify</a><a href="#merch">merch</a></nav>
+  <span class="cross" style="left:6vw;top:42%">+</span>
+  <span class="cross" style="right:6vw;bottom:8vh">+</span>
+  <h1 class="title" aria-label="NSQK"><span style="--n:0">N</span><span style="--n:1">S</span><span style="--n:2">Q</span><span style="--n:3">K</span></h1>
+  <div class="tag">Vive el ruido<br>con NSQK</div>
+  <div class="tag r">artista<br>desde 20XX</div>
+</section>
+
+<!-- BIOGRAFÍA -->
+<section class="bio" id="bio">
+  <div class="photo"></div>
+  <h2>biografía</h2>
+  <span class="cross" style="right:6vw;top:10vh">+</span>
+  <span class="cross" style="right:6vw;bottom:14vh">+</span>
+  <div class="blk hl"><b>origen</b><p>Rodrigo Torres de la Garza nació en Monterrey y creció en Houston. Empezó en el colectivo No Pedí Permiso y en el dúo Southboys, antes de lanzarse como solista.</p></div>
+  <div class="inner">
+    <div class="blk"><b>estilo</b><p>Mezcla pop, rap, R&B, rock y electrónica. Produce su propia música y cuida letras, sonido y estética para romper las barreras entre géneros.</p></div>
+    <div class="blk"><b>trayectoria</b><p>Botánica (2020), Braille y Brailluxe (2021) y ROY (2022). En 2024 estrenó "misa" y cerró la era de ATP con "UGH" y "OTROS LUGARES".</p></div>
+  </div>
+  <p class="foot">Producir, escribir y no parecerse a nadie.</p>
+</section>
+
+<!-- ÁLBUMES -->
+<section class="albums" id="albums">
+  <input type="radio" name="alb" id="a1" checked>
+  <input type="radio" name="alb" id="a2">
+  <input type="radio" name="alb" id="a3">
+  <input type="radio" name="alb" id="a4">
+  <input type="radio" name="alb" id="a5">
+  <span class="cross" style="right:6vw;top:8vh;z-index:40">+</span>
+  <h2>álbumes</h2>
+
+  <div class="row">
+    <div class="bg"></div>
+
+    <!-- palabra gigante, nombre, año, descripción y canción de cada álbum -->
+    <div class="s s1"><div class="ghost">Braille</div><div class="info"><small>2021</small><h3>Braille</h3><p>Braille es un EP colaborativo de NSQK y Méne, lanzado en 2021, que nació durante la pandemia, cuando ambos artistas tuvieron que aprender a comunicarse y crear música a distancia. Su nombre hace referencia al sistema de lectura táctil, simbolizando la comunicación y la conexión entre las personas incluso cuando no pueden estar físicamente juntas. A través de sus canciones, explora el amor, la amistad, el cariño, la vulnerabilidad y los recuerdos que compartimos con quienes son importantes para nosotros. Combina sonidos de pop alternativo, R&B y rap, creando una mezcla de emociones alegres, románticas y melancólicas. En general, Braille representa la importancia de conectar con otras personas, expresar lo que sentimos y mantener los vínculos a pesar de la distancia.</p><iframe src="https://open.spotify.com/embed/track/10GRn3X3EpA8brG747Rmra" loading="lazy" allow="encrypted-media" title="Canción de Braille"></iframe></div></div>
+    <div class="s s2"><div class="ghost">ROY</div><div class="info"><small>2022</small><h3>ROY</h3><p>ROY de NSQK es su álbum debut y representa una etapa de introspección, cambios personales y crecimiento. A través de sus canciones, habla sobre el miedo a crecer, las inseguridades, las decepciones, el desamor y la aceptación de uno mismo. El nombre ROY representa un alter ego de Rodrigo Torres, una faceta más personal con la que explora emociones y pensamientos que forman parte de su historia. El álbum también refleja la idea de que crecer implica enfrentar el pasado, aceptar los cambios y aprender a soltar. Musicalmente, combina sonidos electrónicos, pop alternativo, rock y rap, mostrando una faceta experimental y diferente del artista. En general, ROY es una catarsis emocional en la que NSQK transforma experiencias difíciles en música y aprende a comprenderse mejor a sí mismo.</p><iframe src="https://open.spotify.com/embed/track/0QYSECtjVCysOVy77g31eS" loading="lazy" allow="encrypted-media" title="Canción de ROY"></iframe></div></div>
+    <div class="s s3"><div class="ghost">EN VIVO</div><div class="info"><small>2023</small><h3>ROY EN VIVO</h3><p>ROY EN VIVO de NSQK es un álbum en vivo grabado durante el cierre de su gira ROY TOUR 2023 en Monterrey, Nuevo León. Este proyecto presenta nuevas versiones de las canciones del álbum ROY, con arreglos diferentes que transmiten las emociones de una manera más intensa y cercana. Representa la conexión entre NSQK y su público, mostrando cómo sus experiencias personales, inseguridades, recuerdos y sentimientos cobran una nueva vida sobre el escenario. Además, incluye momentos especiales de la gira y canciones de su proyecto Botánica. En general, ROY EN VIVO permite experimentar la esencia emocional de ROY de una forma más auténtica, en la que la música, la energía del público y la interpretación del artista se unen.</p><iframe src="https://open.spotify.com/embed/track/4LU4ncjOm6HQfPsAb5hwn2" loading="lazy" allow="encrypted-media" title="Canción de ROY EN VIVO"></iframe></div></div>
+    <div class="s s4"><div class="ghost">ATP</div><div class="info"><small>2024</small><h3>ATP</h3><p>ATP de NSQK significa “Aún Te Pienso”. Es un álbum que habla sobre la nostalgia, el amor, los recuerdos y las personas que, aunque ya no estén en nuestra vida de la misma manera, seguimos pensando en ellas. A través de sus canciones, NSQK expresa sentimientos, experiencias y etapas de crecimiento personal. El álbum está presentado como una estación de radio llamada Radio ATP, que conecta las canciones mediante conversaciones y segmentos que le dan una identidad propia. En general, representa la idea de que hay personas y momentos que nunca olvidamos por completo, aunque el tiempo siga pasando.</p><iframe src="https://open.spotify.com/embed/track/1OSzB7QkZHJZnmQnu61vE8" loading="lazy" allow="encrypted-media" title="Canción de ATP"></iframe></div></div>
+    <div class="s s5"><div class="ghost">mosca</div><div class="info"><small>2026</small><h3>mosca</h3><p>MOSCA de NSQK es un álbum que explora la ambición, el éxito y la transformación personal. Su concepto está inspirado en una experiencia del artista con una infestación de moscas y en La metamorfosis, de Franz Kafka, una obra que aborda los cambios en la identidad. Las moscas simbolizan los pensamientos, las presiones y los aspectos de la vida que muchas veces intentamos ignorar, pero que siguen presentes. A través de sus canciones, NSQK muestra la dualidad entre querer alcanzar la grandeza y el miedo a perderse a sí mismo en el proceso. En general, MOSCA representa cómo el éxito puede cambiar nuestra forma de ver el mundo, nuestras relaciones y nuestra propia identidad, recordándonos la importancia de no olvidar quiénes somos mientras perseguimos nuestros sueños.</p><iframe src="https://open.spotify.com/embed/track/69oWplRBBYbozVuy1tC1HM" loading="lazy" allow="encrypted-media" title="Canción de mosca"></iframe></div></div>
+
+    <!-- portadas -->
+    <label class="cv" for="a1" aria-label="Braille" style="--n:0;--k:#2b5cff">01<img src="braille.jpg" alt=""></label>
+    <label class="cv" for="a2" aria-label="ROY" style="--n:1;--k:#f0f0f0;--e:#8a8a8a;color:#111">02<img src="roy.jpg" alt=""></label>
+    <label class="cv" for="a3" aria-label="ROY EN VIVO" style="--n:2;--k:#ff1a1a">03<img src="roy-en-vivo.jpg" alt=""></label>
+    <label class="cv" for="a4" aria-label="ATP" style="--n:3;--k:#ff7a00">04<img src="atp.jpg" alt=""></label>
+    <label class="cv" for="a5" aria-label="mosca" style="--n:4;--k:#08208f">05<img src="mosca.jpg" alt=""></label>
+
+    <div class="dots">
+      <label for="a1" style="--n:0;--k:#2b5cff"></label>
+      <label for="a2" style="--n:1;--k:#f0f0f0"></label>
+      <label for="a3" style="--n:2;--k:#ff1a1a"></label>
+      <label for="a4" style="--n:3;--k:#ff7a00"></label>
+      <label for="a5" style="--n:4;--k:#08208f"></label>
+    </div>
+  </div>
+</section>
+
+<!-- VISUALES -->
+<section class="vid" id="videos">
+  <h2>visuales</h2>
+  <iframe src="https://www.youtube.com/embed/ZW5rSnZrDOg" title="Video de NSQK" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</section>
+
+<!-- SPOTIFY -->
+<section class="spot" id="spotify">
+  <h2>escúchalo<br>ahora</h2>
+  <a class="btn" href="https://open.spotify.com/intl-es/artist/1jtvmXiemNFkPO11NMdjfu?si=RIi7MKetSXOu8SSpE8MPWw">Abrir NSQK en Spotify</a>
+</section>
+
+<!-- MERCH: guarda tus fotos como merch1.jpg ... merch9.jpg junto a este archivo -->
+<section class="merch" id="merch">
+  <h2>merch</h2>
+  <div class="grid">
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch1.jpg" alt="Producto 1"></div>ATP 12" vinyl (Edición Limitada)<span>Precio habitual$ 1,100.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch2.jpg" alt="Producto 2"></div>ATP CD<span>Precio habitual$ 250.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch3.jpg" alt="Producto 3"></div>ATP Hoodie<span>Precio habitual$ 1,600.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch4.jpg" alt="Producto 4"></div>Alter Ego Zip Up Hoodie Cafe<span>Precio habitual$ 1,600.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch5.jpg" alt="Producto 5"></div>Alter Ego T-shirt<span>Precio habitual$ 700.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch6.jpg" alt="Producto 6"></div>Alter Ego Tank Top<span>Precio habitual$ 600.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch7.jpg" alt="Producto 7"></div>ATP Trucker Hat<span>Precio habitual$ 600.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch8.jpg" alt="Producto 8"></div>Alter Ego Totebag<span>Precio habitual$ 400.00 MXN</span></a>
+    <a class="item" href="https://shop.roy600.com/"><div class="pic"><img src="merch9.jpg" alt="Producto 9"></div>PREVENTA: ROY Album 12" vinyl (Edición Limitada)<span>Precio habitual$ 999.00 MXN</span></a>
+  </div>
+  <a class="btn" href="https://shop.roy600.com/">Ver tienda</a>
+</section>
+
+</body>
+</html>
